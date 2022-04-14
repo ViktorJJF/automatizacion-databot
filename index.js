@@ -12,6 +12,9 @@ const MESSAGES = [
   "quien te creo",
 ];
 
+const INTERVAL_BETWEEN_MESSAGE = 4 * 1000;
+const SECONDS_TO_NEW_BOT = 3 * 1000;
+
 async function start() {
   const puppeteer = require("puppeteer");
   const browser = await puppeteer.launch({
@@ -44,7 +47,7 @@ async function start() {
       delay: 100,
     });
     await frame.click(".btn_icon.btn_send");
-  }, 4000);
+  }, INTERVAL_BETWEEN_MESSAGE);
 }
 
 function timeout(millis) {
@@ -59,7 +62,7 @@ function random(min, max) {
 
 (async () => {
   for (let i = 0; i < CURRENT_BOTS; i++) {
-    await timeout(3000);
+    await timeout(SECONDS_TO_NEW_BOT);
     console.log("iniciado nuevo...");
     start();
   }
